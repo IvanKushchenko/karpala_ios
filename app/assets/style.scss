@@ -1,0 +1,472 @@
+html,
+body
+{
+	font-size: 16px;
+	font-family: $roboto;
+	color: $textColor;
+	min-width: 360px;
+    zoom: 1.03;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-overflow-scrolling: touch;
+}
+input[type=time]
+{
+	position: relative;
+}
+input[type=time]::-webkit-inner-spin-button
+{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto 0;
+	right: 40px;
+}
+ul
+{
+	padding-inline-start: 0;
+	margin-block-start: 0;
+	margin-block-end: 0;
+	li
+	{
+		list-style: none;
+	}
+}
+pre
+{
+	margin: 0;
+}
+form
+{
+	width: 100%;
+}
+a
+{
+	text-decoration: none;
+	color: $textColor;
+}
+*
+{
+	box-sizing: border-box;
+}
+
+.main{
+	width: 100%;
+}
+.statistic-pagination
+{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 0;
+}
+.container
+{
+	padding: 0 24px;
+	width: 100%;
+	max-width: 600px;
+	margin: 0 auto;
+	min-height: calc(100vh - 163px);
+	&_wide
+	{
+		max-width: 864px;
+	}
+	&_full
+	{
+		max-width: 1080px;
+	}
+}
+button
+{
+	cursor: pointer;
+	border: none;
+	outline: none;
+}
+.button
+{
+	@include ease($time: .2s)
+	background-color: $lightBlue;
+	color: #fff;
+	width: 100%;
+	font-family: $medium;
+	font-size: 14px;
+	line-height: 18px;
+	border-radius: 4px;
+	height: 56px;
+	cursor: pointer;
+	text-transform: uppercase;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	outline: none;
+	border: none;
+	&:hover
+	{
+		background-color: #274bc8;
+	}
+	&_plus
+	{
+		position: relative;
+		svg
+		{
+			position: absolute;
+			right: 20px;
+		}
+	}
+	&_white
+	{
+		background-color: transparent;
+		color: $lightBlue;
+		border: 1px solid $lightBlue;
+		&:hover
+		{
+			border-color: $main;
+			color: $main;
+			background-color: transparent;
+		}
+	}
+	&_white-grey-border
+	{
+		border-color: #ADAEAD;
+	}
+	&_disabled
+	{
+		border: 1px solid #ADAEAD;
+		color: #ADAEAD;
+		background-color: transparent;
+		pointer-events: none;
+	}
+}
+h1
+{
+	margin: 0;
+}
+.h1
+{
+	margin: 0;
+	font-weight: bold;
+	font-size: 30px;
+	line-height: 34px;
+	color: $textColor;
+	margin-bottom: 32px;
+}
+.h2
+{
+	margin: 0;
+	font-family: $roboto;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 28px;
+	color: #000;
+	margin-bottom: 10px;
+}
+.h3
+{
+	margin: 0;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 24px;
+	color: $textColor;
+	margin-bottom: 16px;
+}
+.text
+{
+	font-size: 16px;
+	line-height: 24px;
+	margin: 0;
+	color: $textColor;
+}
+.order-search__txt-not-found
+{
+	div, a
+	{
+		padding: 15px 0;
+	}
+}
+.textarea
+{
+	width: 100%;
+	height: 120px;
+	resize: none;
+	outline: none;
+	border-radius: 4px;
+	border: 2px solid transparent;
+	background-color: #fff;
+	padding: 16px;
+	&:focus
+	{
+		border-color: $lightBlue;
+	}
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+{
+	-webkit-appearance: none;
+	margin: 0;
+}
+input[type=number]
+{
+	-moz-appearance:textfield;
+}
+.input
+{
+	@include ease($time: .135s)
+	width: 100%;
+	border: 2px solid transparent;
+	height: 56px;
+	border-radius: 4px;
+	outline: none;
+	box-sizing: border-box;
+	background-color: #fff;
+	padding: 0 16px;
+	&_pointer-events
+	{
+		pointer-events: none;
+	}
+	&:focus
+	{
+		border-color: $lightBlue !important;
+	}
+	&_disabled-click
+	{
+		cursor: pointer;
+	}
+	&:disabled
+	{
+		background-color: #ECECEC;
+	}
+	&_disabled-white
+	{
+		background-color: #fff !important;
+	}
+}
+.input-wrapper
+{
+	position: relative;
+	.input-msg
+	{
+		font-size: 12px;
+		display: none;
+		position: absolute;
+		top: 60px;
+		left: 0;
+	}
+	&_error
+	{
+		input,
+		textarea
+		{
+			border-bottom-color: $red;
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+		&:after
+		{
+			content: '';
+			width: 20px;
+			height: 20px;
+			display: block;
+			position: absolute;
+			top: 18px;
+			right: 14px;
+			background-image: url('/error.svg');
+		}
+		.input-msg
+		{
+			display: block;
+			color: red;
+		}
+	}
+}
+.link
+{
+	@include ease($time: .135s)
+	font-size: 14px;
+	line-height: 18px;
+	color: $grey;
+	text-decoration: none;
+	cursor: pointer;
+	&_text
+	{
+		font-size: 16px;
+	}
+	&:hover
+	{
+		color: $green;
+	}
+	&_green
+	{
+		color: $green;
+		cursor: pointer;
+	}
+}
+.checkbox-label
+{
+	display: inline-block;
+	position: relative;
+	padding-left: 25px;
+	font-size: 14px;
+	color: $textColor;
+	font-size: 14px;
+	cursor: pointer;
+	min-height: 18px;
+	letter-spacing: 1px;
+	padding-top: 1px;
+}
+.checkbox
+{
+	visibility: hidden;
+	position: absolute;
+}
+.checkbox:not(checked) + span
+{
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	border: 2px solid $grey;
+	border-radius: 2px;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.checkbox:checked + span
+{
+
+	background-image: url('/checked.svg');
+	background-size: 18px;
+	background-repeat: no-repeat;
+	background-position: center;
+	border: none;
+}
+.radio-label
+{
+	display: inline-block;
+	position: relative;
+	padding-left: 25px;
+	font-size: 14px;
+	color: $textColor;
+	font-size: 14px;
+	cursor: pointer;
+	min-height: 18px;
+	padding-top: 1px;
+}
+.radio
+{
+	visibility: hidden;
+	position: absolute;
+}
+.radio:not(checked) + span
+{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border: 2px solid $lightBlue;
+	border-radius: 2px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	border-radius: 50%;
+}
+.radio:checked + span
+{
+	&:after
+	{
+		content: '';
+		margin: auto;
+		border-radius: 50%;
+		width: 10px;
+		height: 10px;
+		display: block;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background-color: $lightBlue;
+	}
+}
+.blue-text-btn
+{
+	font-family: $medium;
+	text-transform: uppercase;
+	font-size: 14px;
+	color: $lightBlue;
+}
+::-webkit-scrollbar-track
+{
+
+}
+
+::-webkit-scrollbar
+{
+
+}
+
+::-webkit-scrollbar-thumb
+{
+
+}
+.noUi-touch-area
+{
+	background-color: red important;
+	&:before
+	{
+		content: '';
+		display: block;
+		position: absolute;
+		width: 30px;
+		height: 30px;
+		left: -9px;
+		top: -10px;
+	}
+}
+.order-search__textarea.input-wrapper .input-msg
+{
+	top: 120px;
+}
+@media (max-width: 1024px)
+{
+	.container
+	{
+		padding-top: 24px;
+	}
+}
+@media (max-width: 767px)
+{
+	.container
+	{
+		padding: 24px 8px;
+	}
+}
+
+.textarea{
+	@extend .input;
+	height: 120px;
+	resize: none;
+}
+
+.text-success{
+	color: $lightGreen;
+}
+
+.avatars{
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: center;
+
+	&__item{
+		width: 54px;
+		height: 54px;
+		overflow: hidden;
+		border-radius: 50%;
+
+		&:not(:last-child){
+			margin-left: -90px;
+		}
+		img{
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+}

@@ -1,41 +1,38 @@
 <template>
-    <Page>
-        <ActionBar>
-            <Label text="Home"/>
-        </ActionBar>
+	<Page class="page">
+      <ActionBar class="action-bar">
+        <NavigationButton visibility="hidden"/>
+        <GridLayout columns="50, *">
+          <Label class="action-bar-title" text="Home" colSpan="2"/>
 
-        <GridLayout>
-            <Label class="info">
-                <FormattedString>
-                    <Span class="fas" text.decode="&#xf135; "/>
-                    <Span :text="message"/>
-                </FormattedString>
-            </Label>
+          <Label class="fas" text.decode="&#xf0c9;" @tap="onDrawerButtonTap"/>
+        </GridLayout>
+      </ActionBar>
+
+        <GridLayout class="page__content">
+            <Label text="page content Home"/>
         </GridLayout>
     </Page>
 </template>
 
 <script>
-  export default {
-    computed: {
-      message() {
-        return "Blank {N}-Vue app";
-      }
+import * as utils from "~/shared/utils";
+export default {
+
+  name: 'Home',
+
+  data () {
+    return {
+
     }
-  };
+  },
+  methods: {
+		onDrawerButtonTap() {
+			utils.showDrawer();
+		}
+	}
+}
 </script>
 
-<style scoped lang="scss">
-    @import '@nativescript/theme/scss/variables/blue';
-
-    // Custom styles
-    .fas {
-        @include colorize($color: accent);
-    }
-
-    .info {
-        font-size: 20;
-        horizontal-align: center;
-        vertical-align: center;
-    }
+<style lang="css" scoped>
 </style>
