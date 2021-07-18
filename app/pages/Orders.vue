@@ -1,13 +1,22 @@
 <template>
 	<Page backgroundColor="#F5F5F5">
+		
 		<ActionBar class="action-bar" height="60" backgroundColor="#283593">
-			<ActionItem @tap="onCancelButtonTap" ios.position="left">
-                <Label class="fas" text.decode="&#xf0c9;" color="#fff" @tap="onDrawerButtonTap"/>
+			<NavigationButton visibility="hidden" />
+			<ActionItem>
+                <Label class="fas" text.decode="&#xf0c9;" fontSize="24" color="#fff" @tap="onDrawerButtonTap"/>
+            </ActionItem>
+            <ActionItem v-if="auth" ios.position="right">
+                <Label class="fas" text.decode="&#xf2f5;" fontSize="24" color="#fff" @tap="logout"/>
             </ActionItem>
 		</ActionBar>
 		<StackLayout class="container">
-			<ScrollView>
-				<FlexboxLayout class="page__content" flexDirection="column">
+			<ActivityIndicator v-if="loading" busy="true"/>
+			<ScrollView v-else>
+				<FlexboxLayout v-if="!auth">
+					<Label text="Авторизуйтесь" />
+				</FlexboxLayout>
+				<FlexboxLayout v-else class="page__content" flexDirection="column">
 					
 			            <OrderItem v-for="order in orders" :key="order.id" :order="order"/>
 					
@@ -18,6 +27,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import * as utils from "~/shared/utils";
 import OrderItem from '../components/OrderItem.vue';
 export default {
@@ -28,12 +38,16 @@ export default {
 	},
 	data() {
 		return {
+			loading: false,
 			orders: [],
 			counter: 1,
 			allResults: false,
 		}
 	},
 	methods: {
+		logout(){
+			this.$store.dispatch('logout');
+		},
 		onDrawerButtonTap() {
 			utils.showDrawer();
 		},
@@ -58,6 +72,14 @@ export default {
 				this.allResults = true;
 			}
 		},
+	},
+	computed: {
+		...mapState({
+			user: state => state.user
+		}),
+		auth(){
+			return !!this.user;
+		}
 	},
 	mounted(){
 		this.getOrders();

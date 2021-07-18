@@ -3,11 +3,58 @@ import Vue from 'nativescript-vue'
 // import router from './router';
 // import * as http from "http";
 import store from './store/index';
-// import VeeValidate from 'vee-validate';
+// import VeeValidate from 'vee-validate/dist/vee-validate';
 import RadSideDrawer from 'nativescript-ui-sidedrawer/vue';
 Vue.use(RadSideDrawer);
 import axios from './axios';
 Vue.prototype.$axios = axios;
+
+
+// const dict = {
+// 	ru: {
+// 		messages: {
+// 			required() {
+// 				return "Поле не заполненно";
+// 			},
+// 			min(fieldName) {
+// 				return `Неверный формат, поле ${fieldName} должно быть длиннее`;
+// 			},
+// 			max(fieldName) {
+// 				return `Неверный формат, поле ${fieldName} должно быть короче`;
+// 			},
+// 			email() {
+// 				return "Неверный формат электронной почты";
+// 			},
+// 			numeric() {
+// 				return "Неверный формат, должны быть только цифры";
+// 			},
+// 			length() {
+// 				return "Неверный формат";
+// 			},
+// 			regex(fieldName) {
+// 				return `Неверный формат поля "${fieldName}"`;
+// 			}
+// 		}
+// 	}
+// };
+
+// const config = {
+// 	aria: false,
+// 	classNames: {},
+// 	classes: false,
+// 	delay: 0,
+// 	dictionary: dict,
+// 	errorBagName: 'errors', // change if property conflicts
+// 	events: '',
+// 	fieldsBagName: 'fields',
+// 	i18n: null, // the vue-i18n plugin instance
+// 	i18nRootKey: 'validations', // the nested key under which the validation messages will be located
+// 	inject: true,
+// 	locale: 'ru',
+// 	validity: false
+// };
+// Vue.use(VeeValidate, config);
+
 // import CanvasSVG from '@nativescript-community/ui-svg/vue';
 // Vue.use(CanvasSVG);
 

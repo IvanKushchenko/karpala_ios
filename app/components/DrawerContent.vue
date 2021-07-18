@@ -16,33 +16,21 @@
 						<Label :color="+user.balance < 0 ? '#F44336' : '#00C853'" :text="`Баланс: ${moneyFormat(user.balance)}`" />
 					</FlexboxLayout>
 					
-					<FlexboxLayout v-else flexDirection="column">
-						<Button backgroundColor="transparent" color="#fff" text="Войти или зарегистрироваться"/>
+					<FlexboxLayout v-else flexDirection="column" alignItems="center">
+						<Button @tap="onNavigationItemTap('Authorization')" backgroundColor="transparent" color="#fff" text="Войти или зарегистрироваться"/>
 					</FlexboxLayout>
 	                
                 </FlexboxLayout>
 				
-				<FlexboxLayout width="100%" padding="10 15">
-					<Button fontSize="18" padding="12 0" :color="selectedPage === 'Orders' ? '#00C853' : '#000'">
+				<FlexboxLayout width="100%" padding="10 15" flexDirection="column">
+					<Button v-for="item in menuMain" :key="item.name" @tap="onNavigationItemTap('Orders')" fontSize="16" textAlignment="left" padding="12 0" :color="selectedPage === item.page ? '#00C853' : '#000'">
 						<FormattedString>
-							<Span text.decode="&#xf0ca;" class="fas"/>
+							<Span :text.decode="String.fromCharCode(item.icon)" class="fas"/>
 							<Span text="	"/>
-							<Span text="Все заказы"/>
+							<Span :text="item.name"/>
 						</FormattedString>
 					</Button>
 				</FlexboxLayout>
-               <!--  <GridLayout padding="12 0" columns="auto, *"
-                			:color="selectedPage === 'Orders' ? '#00C853' : '#000'"
-                            @tap="onNavigationItemTap(Orders)">
-                    <Label col="0" text.decode="&#xf015;" class="nt-icon fas"/>
-                    <Label col="1" text="Все заказы" class="p-r-10"/>
-                </GridLayout> -->
-				<!--  <GridLayout columns="auto, *"
-                			:class="'nt-drawer__list-item' + (selectedPage === 'Orders' ? ' -selected': '')"
-                            @tap="onNavigationItemTap(Orders)">
-                    <Label col="0" text.decode="&#xf015;" class="nt-icon fas"/>
-                    <Label col="1" text="Orders" class="p-r-10"/>
-                </GridLayout> -->
 			</StackLayout>
         </ScrollView>
     </GridLayout>
@@ -50,8 +38,10 @@
 
 <script>
 import moneyFormat from '@/mixins/moneyFormat.js';
-import Orders from "../pages/Orders";
+import Orders from "@/pages/Orders";
+import Authorization from '@/pages/Authorization';
 import * as utils from "~/shared/utils";
+import { mapState } from 'vuex';
 // import {
 // 	SelectedPageService
 // } from "~/shared/selected-page-service";
@@ -67,35 +57,35 @@ export default {
 			menuMain: [
 				{
 					name: 'Все заказы',
-					icon: '&#xf0ca;',
-					page: Orders
+					icon: '0xf0ca',
+					page: 'Orders'
 				},
 				{
 					name: 'Мои предложения',
-					icon: '&#xf022;',
-					page: Orders
+					icon: '0xf022',
+					page: 'DriverOrders'
 				},
 				{
 					name: 'В работе',
-					icon: '&#xf1ba;',
-					page: Orders
+					icon: '0xf1ba',
+					page: 'DriverOrders'
 				},
 				{
 					name: 'В поиске',
-					icon: '&#xf3eb;',
-					page: Orders
+					icon: '0xf002',
+					page: 'MyPreorders'
 				},
 				{
 					name: 'Личный кабинет',
-					icon: '&#xf4fe;',
-					page: Orders
+					icon: '0xf4fe',
+					page: 'Personal'
 				}
 			],
 			mainAdditional: [
 				{
 					name: 'Настройки',
 					icon: '&#xf013;',
-					page: Orders
+					page: 'Settings'
 				},
 				{
 					name: 'Рассказать другу',
@@ -108,18 +98,21 @@ export default {
 					page: Orders
 				}
 			],
-			Orders: Orders,
+			pages: {
+				Orders,
+				Authorization
+			},
 			selectedPage: ""
 		}
 	},
 	computed: {
-		user() {
-			return this.$store.state.user
-		},
+		...mapState({
+			user: state => state.user
+		}),
 	},
 	methods: {
 		onNavigationItemTap(component) {
-			this.$navigateTo(component);
+			this.$navigateTo(this.pages[component]);
 			utils.closeDrawer();
 		}
 	},

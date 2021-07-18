@@ -11,8 +11,7 @@ $lightBlue: #304FFE;
 $textColor: #212121;
 $lightGrey: #989898;
 $yellow: #FFE600;
-@mixin ease($time)
-{
+@mixin ease($time) {
 	transition: all $time ease;
 }
 

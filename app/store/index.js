@@ -1,10 +1,9 @@
-import * as applicationSettings from "tns-core-modules/application-settings";
-
 import Vue from 'nativescript-vue';
 import Vuex from 'vuex';
 import axios from '../axios';
 import orders from './orders.js';
 import registrationDriver from './registrationDriver';
+import * as applicationSettings from "tns-core-modules/application-settings";
 
 Vue.use(Vuex);
 export default new Vuex.Store({
@@ -14,10 +13,9 @@ export default new Vuex.Store({
 		registrationDriver
 	},
 	state: {
-		apiToken: applicationSettings.getString('apiToken'),
 		banned: false,
 		notApprovedDispatcher: false,
-		user: false,
+		user: null,
 		sidebarState: true,
 		nestedPage: false,
 		pageTitle: '',
@@ -41,6 +39,7 @@ export default new Vuex.Store({
 		},
 		setUser(state, user) {
 			state.user = user;
+			applicationSettings.setString('user', JSON.stringify(user));
 		},
 		setClient(state, client) {
 			state.client = client;
@@ -48,19 +47,25 @@ export default new Vuex.Store({
 		},
 	},
 	actions: {
-		async getUser(store) {
-			const result = await $axios({
-				method: 'post',
-				url: '/api/auth/isLogged/',
-			});
-
-			if (result.data.success)
-				store.commit('setUser', result.data.user);
+		async logout({state}){
+			let result = await axios('/api/auth/logOut/');
+			if(result.data.success){
+				state.user = null;
+				applicationSettings.clear();
+			}
+		},
+		getUser({state, commit}) {
+			if(state.user) return state.user;
+			let user = applicationSettings.getString('user');
+			if(!user) return false;
+			user = JSON.parse(user);
+			commit('setUser', user);
+			return user;
 		},
 		async getClient(store, {
 			access
 		}) {
-			const result = await $axios({
+			const result = await axios({
 				method: 'post',
 				url: `/api/auth/isClient/${access}`,
 			});
