@@ -1,0 +1,21 @@
+$roboto: 'Roboto','PT Sans', sans-serif;
+$medium: 'RobotoMedium','PT Sans', sans-serif;
+
+$main: #283593;
+$green: #00C853;
+$lightGreen: #31CB87;
+$red: #F44336;
+$darkenRed: #DB4437;
+$grey: #747474;
+$lightBlue: #304FFE;
+$textColor: #212121;
+$lightGrey: #989898;
+$yellow: #FFE600;
+@mixin ease($time) {
+	transition: all $time ease;
+}
+
+
+
+
+

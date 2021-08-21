@@ -1,7 +1,7 @@
 import { NativeScriptConfig } from '@nativescript/core';
 
 export default {
-  id: 'org.nativescript.karpios',
+  id: 'org.nativescript.karpal',
   appPath: 'app',
   appResourcesPath: 'App_Resources',
   android: {
